@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#3B82F6">
-    <meta name="description" content="健身记录应用 - 追踪你的健身旅程，记录训练数据，获取智能建议">
+    <meta name="theme-color" content="#10B981">
+    <meta name="description" content="FitTrack Pro - 专业健身追踪应用，记录训练数据，追踪健身进度，获取个性化建议">
     <!-- PWA相关配置 -->
     <link rel="manifest" href="#" crossorigin="use-credentials">
     <link rel="apple-touch-icon" href="#" sizes="180x180">
     <link rel="icon" href="#" type="image/png" sizes="32x32">
-    <title>健身记录 - 追踪你的健身旅程</title>
+    <title>FitTrack Pro - 专业健身追踪</title>
     <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -22,9 +22,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6', // 活力蓝
+                        primary: '#10B981', // 薄荷绿
                         secondary: '#F97316', // 能量橙
-                        tertiary: '#10B981', // 沉稳绿
+                        tertiary: '#3B82F6', // 活力蓝
                         dark: '#1E293B',
                         light: '#F8FAFC'
                     },
@@ -104,10 +104,10 @@
             
             /* 日历样式 */
             .calendar-day {
-                @apply h-[12vw] min-h-[56px] max-h-[80px] p-1 border border-gray-200 dark:border-gray-700 rounded-lg transition-all duration-200;
+                @apply h-[18vw] min-h-[80px] max-h-[120px] p-1 border border-gray-200 dark:border-gray-700 rounded-lg transition-all duration-200;
             }
             .calendar-day-current {
-                @apply bg-primary/10 dark:bg-primary/20 border-primary;
+                @apply bg-primary/10 dark:bg-primary/20 border-gray-200 dark:border-gray-700;
             }
             .calendar-day-past {
                 @apply hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer;
@@ -116,7 +116,7 @@
                 @apply bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-600 cursor-not-allowed;
             }
             .calendar-day-has-workout {
-                @apply ring-2 ring-primary/50;
+                @apply ring-0;
             }
             
             /* 主题切换动画 */
@@ -147,12 +147,9 @@
         <header class="theme-transition sticky top-0 z-50 glass border-b border-gray-200 dark:border-gray-800 pt-safe-top">
             <div class="flex items-center justify-between p-4">
                 <div class="flex items-center gap-2">
-                    <h1 class="text-[clamp(1.25rem,5vw,1.5rem)] font-bold text-primary">健身记录</h1>
+                    <h1 class="text-[clamp(1.25rem,5vw,1.5rem)] font-bold text-primary">FitTrack Pro</h1>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button id="notifications-btn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                        <i class="fa fa-bell-o text-[clamp(1rem,4vw,1.25rem)]"></i>
-                    </button>
                     <button id="settings-btn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <i class="fa fa-cog text-[clamp(1rem,4vw,1.25rem)]"></i>
                     </button>
@@ -378,44 +375,33 @@
                 </button>
             </div>
             
-            <!-- 主题设置 -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">主题</h3>
-                <div class="grid grid-cols-4 gap-3">
-                    <button class="theme-btn w-12 h-12 rounded-full bg-primary ring-2 ring-offset-2 ring-primary" data-theme="blue"></button>
-                    <button class="theme-btn w-12 h-12 rounded-full bg-secondary" data-theme="orange"></button>
-                    <button class="theme-btn w-12 h-12 rounded-full bg-tertiary" data-theme="green"></button>
-                    <button class="theme-btn w-12 h-12 rounded-full bg-purple-500" data-theme="purple"></button>
-                </div>
-            </div>
+
             
-            <!-- 深色模式 -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">深色模式</h3>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-                </label>
-            </div>
+
+
             
-            <!-- 重量单位 -->
+            <!-- 背景图片设置 -->
             <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">重量单位</h3>
-                <div class="flex gap-3">
-                    <button id="unit-kg" class="btn btn-primary flex-1">千克 (kg)</button>
-                    <button id="unit-lb" class="btn btn-outline flex-1">磅 (lb)</button>
-                </div>
-            </div>
-            
-            <!-- 通知设置 -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">通知</h3>
-                <div class="flex items-center justify-between">
-                    <span>训练提醒</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="notifications-toggle" class="sr-only peer" checked>
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-                    </label>
+                <h3 class="text-lg font-semibold mb-3">背景图片</h3>
+                <div class="flex flex-col gap-3">
+                    <button id="select-background" class="btn btn-primary flex-1">
+                        <i class="fa fa-image mr-2"></i>
+                        <span>选择图片</span>
+                    </button>
+
+                    <button id="clear-background" class="btn btn-outline flex-1">
+                        <i class="fa fa-trash-o mr-2"></i>
+                        <span>清除背景</span>
+                    </button>
+                    <div class="mt-2">
+                        <label for="background-opacity" class="block text-sm font-medium mb-2">透明度</label>
+                        <input type="range" id="background-opacity" min="50" max="100" value="90" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>半透明</span>
+                            <span>不透明</span>
+                        </div>
+                    </div>
+                    <input type="file" id="background-input" accept="image/*" class="hidden">
                 </div>
             </div>
             
@@ -451,6 +437,44 @@
         </div>
     </div>
 
+    <!-- 图片裁剪模态框 -->
+    <div id="crop-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="crop-overlay"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 glass rounded-2xl p-4 w-full max-w-lg animate-scale-in">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold">设置背景图片</h3>
+                <button id="close-crop" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- 图片裁剪区域 -->
+            <div class="relative w-full h-[50vh] bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden mb-4">
+                <img id="crop-image" class="absolute top-0 left-0 w-full h-full object-contain" src="" alt="裁剪预览">
+                <div id="crop-selection" class="absolute border-2 border-white bg-white/20 cursor-move"></div>
+                <div class="absolute top-2 left-2 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
+                    拖动选择区域
+                </div>
+            </div>
+            
+            <!-- 透明度设置 -->
+            <div class="mb-4">
+                <label for="crop-opacity" class="block text-sm font-medium mb-2">透明度</label>
+                <input type="range" id="crop-opacity" min="50" max="100" value="90" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>半透明</span>
+                    <span>不透明</span>
+                </div>
+            </div>
+            
+            <!-- 操作按钮 -->
+            <div class="flex gap-3">
+                <button id="cancel-crop" class="btn btn-outline flex-1">取消</button>
+                <button id="apply-crop" class="btn btn-primary flex-1">保存并应用</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 提示消息 -->
     <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 hidden">
         <div class="glass rounded-lg px-4 py-3 shadow-lg flex items-center gap-2 animate-fade-in">
@@ -460,9 +484,6 @@
     </div>
 
     <script>
-        // 强制禁用深色模式（确保应用以浅色模式启动）
-        document.documentElement.classList.remove('dark');
-        
         // 全局变量
         const app = {
             currentDate: new Date(),
@@ -470,11 +491,13 @@
             currentView: 'calendar',
             workouts: {},
             settings: {
-                theme: 'blue',
-                darkMode: false,
-                units: 'kg',
+                theme: 'green',
+                backgroundImage: null,
+                backgroundOpacity: 0.9,
                 notifications: true
             },
+            // 临时变量
+            tempBackgroundImage: null,
             parts: {
                 chest: '胸',
                 back: '背',
@@ -518,9 +541,6 @@
             closeSettings: document.getElementById('close-settings'),
             modalOverlay: document.getElementById('modal-overlay'),
             themeBtns: document.querySelectorAll('.theme-btn'),
-            darkModeToggle: document.getElementById('dark-mode-toggle'),
-            unitKg: document.getElementById('unit-kg'),
-            unitLb: document.getElementById('unit-lb'),
             notificationsToggle: document.getElementById('notifications-toggle'),
             exportData: document.getElementById('export-data'),
             clearData: document.getElementById('clear-data'),
@@ -545,9 +565,6 @@
             loadData();
             setupEventListeners();
             renderCalendar();
-            // 确保应用以浅色模式启动
-            document.documentElement.classList.remove('dark');
-            app.settings.darkMode = false;
             applySettings();
         }
 
@@ -607,11 +624,6 @@
             
 
 
-            // 通知按钮
-            document.getElementById('notifications-btn').addEventListener('click', () => {
-                showToast('暂无新通知', 'info');
-            });
-
             // 设置按钮
             document.getElementById('settings-btn').addEventListener('click', () => {
                 elements.settingsModal.classList.remove('hidden');
@@ -637,23 +649,7 @@
                 elements.settingsModal.classList.add('hidden');
             });
 
-            // 主题切换
-            elements.themeBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const theme = btn.dataset.theme;
-                    changeTheme(theme);
-                });
-            });
 
-            // 深色模式切换
-            elements.darkModeToggle.addEventListener('change', toggleDarkMode);
-
-            // 重量单位切换
-            elements.unitKg.addEventListener('click', () => setUnit('kg'));
-            elements.unitLb.addEventListener('click', () => setUnit('lb'));
-
-            // 通知切换
-            elements.notificationsToggle.addEventListener('change', toggleNotifications);
 
             // 导出数据
             elements.exportData.addEventListener('click', exportData);
@@ -666,6 +662,170 @@
                     clearAllData
                 );
             });
+
+            // 背景图片设置
+            const selectBackgroundBtn = document.getElementById('select-background');
+            const backgroundInput = document.getElementById('background-input');
+            const clearBackgroundBtn = document.getElementById('clear-background');
+            const backgroundOpacitySlider = document.getElementById('background-opacity');
+            
+            // 选择图片按钮
+            console.log('背景图片元素检查:', {
+                selectBackgroundBtn: !!selectBackgroundBtn,
+                backgroundInput: !!backgroundInput,
+                showCropModal: typeof showCropModal
+            });
+            
+            if (selectBackgroundBtn && backgroundInput) {
+                console.log('绑定选择图片事件监听器');
+                selectBackgroundBtn.addEventListener('click', () => {
+                    console.log('选择图片按钮被点击');
+                    backgroundInput.click();
+                });
+
+                backgroundInput.addEventListener('change', (e) => {
+                    console.log('文件输入框内容改变');
+                    const file = e.target.files[0];
+                    if (file) {
+                        console.log('选择了文件:', file.name, file.type);
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            console.log('文件读取完成，大小:', e.target.result.length);
+                            app.tempBackgroundImage = e.target.result;
+                            console.log('调用showCropModal函数');
+                            showCropModal();
+                        };
+                        reader.onerror = function(error) {
+                            console.error('文件读取失败:', error);
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        console.log('未选择文件');
+                    }
+                });
+            } else {
+                console.error('背景图片元素未找到');
+            }
+
+            // 清除背景按钮
+            if (clearBackgroundBtn) {
+                clearBackgroundBtn.addEventListener('click', () => {
+                    showConfirmDialog(
+                        '清除背景图片',
+                        '确定要清除当前的背景图片吗？',
+                        clearBackgroundImage
+                    );
+                });
+            }
+
+            // 透明度调整
+            if (backgroundOpacitySlider) {
+                backgroundOpacitySlider.addEventListener('input', (e) => {
+                    if (app.settings.backgroundImage) {
+                        const opacity = e.target.value / 100;
+                        app.settings.backgroundOpacity = opacity;
+                        applyBackgroundImage();
+                        saveData();
+                    }
+                });
+            }
+
+            // 裁剪模态框相关元素
+            const cropModal = document.getElementById('crop-modal');
+            const cancelCropBtn = document.getElementById('cancel-crop');
+            const applyCropBtn = document.getElementById('apply-crop');
+            const closeCropBtn = document.getElementById('close-crop');
+            const cropOverlay = document.getElementById('crop-overlay');
+            const cropOpacitySlider = document.getElementById('crop-opacity');
+
+            // 取消裁剪按钮
+            if (cancelCropBtn && cropModal) {
+                cancelCropBtn.addEventListener('click', () => {
+                    cropModal.classList.add('hidden');
+                    app.tempBackgroundImage = null;
+                });
+            }
+
+            // 应用裁剪按钮
+            if (applyCropBtn) {
+                applyCropBtn.addEventListener('click', applyCrop);
+            }
+
+            // 关闭裁剪模态框按钮
+            if (closeCropBtn && cropModal) {
+                closeCropBtn.addEventListener('click', () => {
+                    cropModal.classList.add('hidden');
+                    app.tempBackgroundImage = null;
+                });
+            }
+
+            // 裁剪模态框遮罩
+            if (cropOverlay && cropModal) {
+                cropOverlay.addEventListener('click', () => {
+                    cropModal.classList.add('hidden');
+                    app.tempBackgroundImage = null;
+                });
+            }
+
+            // 裁剪模态框中的透明度调整
+            if (cropOpacitySlider) {
+                cropOpacitySlider.addEventListener('input', (e) => {
+                    const opacity = e.target.value / 100;
+                    const image = document.getElementById('crop-image');
+                    if (image) {
+                        image.style.opacity = opacity;
+                    }
+                });
+            }
+            
+            if (cancelCropBtn) {
+                cancelCropBtn.addEventListener('click', () => {
+                    console.log('取消裁剪按钮被点击');
+                    if (cropModal) {
+                        cropModal.classList.add('hidden');
+                        app.tempBackgroundImage = null;
+                    }
+                });
+            } else {
+                console.error('取消裁剪按钮未找到');
+            }
+
+            if (applyCropBtn) {
+                applyCropBtn.addEventListener('click', () => {
+                    console.log('应用裁剪按钮被点击');
+                    if (typeof applyCrop === 'function') {
+                        applyCrop();
+                    } else {
+                        console.error('applyCrop函数不存在');
+                    }
+                });
+            } else {
+                console.error('应用裁剪按钮未找到');
+            }
+
+            if (closeCropBtn) {
+                closeCropBtn.addEventListener('click', () => {
+                    console.log('关闭裁剪模态框按钮被点击');
+                    if (cropModal) {
+                        cropModal.classList.add('hidden');
+                        app.tempBackgroundImage = null;
+                    }
+                });
+            } else {
+                console.error('关闭裁剪模态框按钮未找到');
+            }
+
+            if (cropOverlay) {
+                cropOverlay.addEventListener('click', () => {
+                    console.log('裁剪模态框遮罩被点击');
+                    if (cropModal) {
+                        cropModal.classList.add('hidden');
+                        app.tempBackgroundImage = null;
+                    }
+                });
+            } else {
+                console.error('裁剪模态框遮罩未找到');
+            }
 
             // 确认对话框
             elements.confirmCancel.addEventListener('click', () => {
@@ -765,11 +925,11 @@
                 if (hasWorkout) {
                     const workoutParts = getUniquePartsForDate(dateStr);
                     const partsContainer = document.createElement('div');
-                    partsContainer.className = 'flex flex-wrap gap-0.5 mt-auto';
+                    partsContainer.className = 'grid grid-cols-2 gap-0.5 mt-auto';
                     
                     workoutParts.forEach(part => {
                         const partBadge = document.createElement('span');
-                        partBadge.className = `badge badge-${part} text-[10px] px-1 py-0.5 rounded`;
+                        partBadge.className = `badge badge-${part} text-[9px] px-1 py-0.5 rounded text-center`;
                         partBadge.textContent = app.parts[part];
                         partsContainer.appendChild(partBadge);
                     });
@@ -1680,6 +1840,9 @@
                 elements.darkModeToggle.checked = false;
             }
             
+            // 应用背景图片
+            applyBackgroundImage();
+            
             // 应用重量单位
             setUnit(app.settings.units);
             
@@ -1719,7 +1882,7 @@
                     primaryColor = '#3B82F6';
             }
             
-            // 应用主题色
+            // 应用主题色到CSS变量
             document.documentElement.style.setProperty('--tw-color-primary', primaryColor);
             
             // 保存设置
@@ -1826,6 +1989,368 @@
             showToast('所有数据已清除', 'success');
         }
 
+
+
+        // 清除背景图片
+        function clearBackgroundImage() {
+            app.settings.backgroundImage = null;
+            applyBackgroundImage();
+            saveData();
+            showToast('背景图片已清除', 'success');
+        }
+
+        // 应用背景图片
+        function applyBackgroundImage() {
+            const appElement = document.getElementById('app');
+            const opacity = app.settings.backgroundOpacity || 0.9;
+            
+            if (app.settings.backgroundImage) {
+                // 直接设置背景图片
+                appElement.style.backgroundImage = `url('${app.settings.backgroundImage}')`;
+                appElement.style.backgroundSize = 'cover';
+                appElement.style.backgroundPosition = 'center';
+                appElement.style.backgroundAttachment = 'fixed';
+                
+                // 启用裁剪按钮
+
+                
+                // 更新透明度滑块
+                document.getElementById('background-opacity').value = opacity * 100;
+                
+                // 为了确保文字可读性，调整内容区域的背景透明度
+                const mainContent = document.querySelector('main');
+                const header = document.querySelector('header');
+                const footer = document.querySelector('footer');
+                const bgColor = 'rgba(255, 255, 255, '; // 始终使用浅色背景
+                
+                if (mainContent) mainContent.style.backgroundColor = bgColor + opacity + ')';
+                if (header) header.style.backgroundColor = bgColor + (opacity + 0.05) + ')';
+                if (footer) footer.style.backgroundColor = bgColor + (opacity + 0.05) + ')';
+            } else {
+                appElement.style.backgroundImage = '';
+                
+                // 禁用裁剪按钮
+
+                
+                // 恢复默认背景
+                const mainContent = document.querySelector('main');
+                const header = document.querySelector('header');
+                const footer = document.querySelector('footer');
+                if (mainContent) mainContent.style.backgroundColor = '';
+                if (header) header.style.backgroundColor = '';
+                if (footer) footer.style.backgroundColor = '';
+            }
+        }
+
+        // 显示裁剪模态框
+        function showCropModal() {
+            console.log('显示裁剪模态框');
+            const modal = document.getElementById('crop-modal');
+            const image = document.getElementById('crop-image');
+            const selection = document.getElementById('crop-selection');
+            const opacitySlider = document.getElementById('crop-opacity');
+            
+            if (!modal || !image || !selection) {
+                console.error('裁剪模态框必要元素未找到');
+                return;
+            }
+            
+            if (!app.tempBackgroundImage) {
+                console.error('临时背景图片数据不存在');
+                return;
+            }
+            
+            // 设置图片源（使用临时图片数据）
+            image.src = app.tempBackgroundImage;
+            
+            // 设置透明度滑块初始值
+            if (opacitySlider) {
+                opacitySlider.value = app.settings.backgroundOpacity * 100;
+                console.log('设置透明度滑块初始值:', opacitySlider.value);
+            }
+            
+            // 等待图片加载完成后设置裁剪框
+            image.onload = function() {
+                console.log('图片加载完成，设置裁剪框');
+                const container = image.parentElement;
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                
+                console.log('容器尺寸:', containerWidth, 'x', containerHeight);
+                
+                // 计算手机比例裁剪框大小 (9:16)
+                const aspectRatio = 9 / 16;
+                let selectionWidth, selectionHeight;
+                
+                if (containerWidth / containerHeight > aspectRatio) {
+                    // 容器较宽，以高度为基准
+                    selectionHeight = containerHeight * 0.8;
+                    selectionWidth = selectionHeight * aspectRatio;
+                } else {
+                    // 容器较窄，以宽度为基准
+                    selectionWidth = containerWidth * 0.8;
+                    selectionHeight = selectionWidth / aspectRatio;
+                }
+                
+                console.log('裁剪框尺寸:', selectionWidth, 'x', selectionHeight);
+                
+                // 设置裁剪框位置和大小
+                selection.style.width = selectionWidth + 'px';
+                selection.style.height = selectionHeight + 'px';
+                selection.style.left = (containerWidth - selectionWidth) / 2 + 'px';
+                selection.style.top = (containerHeight - selectionHeight) / 2 + 'px';
+                
+                // 设置图片样式
+                image.style.opacity = app.settings.backgroundOpacity;
+                
+                // 添加拖拽功能
+                let isDragging = false;
+                let startX, startY, startLeft, startTop;
+                
+                selection.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    startLeft = parseInt(selection.style.left);
+                    startTop = parseInt(selection.style.top);
+                    selection.style.cursor = 'grabbing';
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    
+                    let newLeft = startLeft + deltaX;
+                    let newTop = startTop + deltaY;
+                    
+                    // 限制在容器内
+                    newLeft = Math.max(0, Math.min(newLeft, containerWidth - selectionWidth));
+                    newTop = Math.max(0, Math.min(newTop, containerHeight - selectionHeight));
+                    
+                    selection.style.left = newLeft + 'px';
+                    selection.style.top = newTop + 'px';
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        selection.style.cursor = 'move';
+                    }
+                });
+                
+                // 显示模态框
+                modal.classList.remove('hidden');
+                console.log('裁剪模态框已显示');
+            };
+            
+            image.onerror = function() {
+                console.error('图片加载失败');
+            };
+        }
+
+        // 使裁剪区域可拖拽
+        function makeSelectionDraggable(selection, container, image) {
+            let isDragging = false;
+            let startX, startY, startLeft, startTop;
+            
+            selection.addEventListener('mousedown', startDrag);
+            selection.addEventListener('touchstart', startDrag, { passive: false });
+            
+            function startDrag(e) {
+                e.preventDefault();
+                isDragging = true;
+                
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                
+                startX = clientX;
+                startY = clientY;
+                startLeft = parseInt(selection.style.left);
+                startTop = parseInt(selection.style.top);
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('touchmove', drag, { passive: false });
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const clientX = e.clientX || e.touches[0].clientX;
+                const clientY = e.clientY || e.touches[0].clientY;
+                
+                const deltaX = clientX - startX;
+                const deltaY = clientY - startY;
+                
+                let newLeft = startLeft + deltaX;
+                let newTop = startTop + deltaY;
+                
+                // 限制在容器内
+                const maxLeft = container.offsetWidth - selection.offsetWidth;
+                const maxTop = container.offsetHeight - selection.offsetHeight;
+                
+                newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+                newTop = Math.max(0, Math.min(newTop, maxTop));
+                
+                selection.style.left = newLeft + 'px';
+                selection.style.top = newTop + 'px';
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchend', stopDrag);
+            }
+        }
+
+        // 应用裁剪
+        function applyCrop() {
+            console.log('开始应用裁剪');
+            const image = document.getElementById('crop-image');
+            const selection = document.getElementById('crop-selection');
+            const opacitySlider = document.getElementById('crop-opacity');
+            
+            if (!image || !selection) {
+                console.error('裁剪必要元素未找到');
+                return;
+            }
+            
+            // 获取透明度设置
+            const opacity = opacitySlider ? opacitySlider.value / 100 : 0.9;
+            console.log('透明度设置:', opacity);
+            
+            try {
+                // 获取裁剪参数
+                const container = image.parentElement;
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                
+                const selectionLeft = parseInt(selection.style.left);
+                const selectionTop = parseInt(selection.style.top);
+                const selectionWidth = selection.offsetWidth;
+                const selectionHeight = selection.offsetHeight;
+                
+                console.log('裁剪参数:', {
+                    containerWidth, containerHeight,
+                    selectionLeft, selectionTop,
+                    selectionWidth, selectionHeight
+                });
+                
+                // 计算图片在容器中的显示比例
+                const imageRatio = image.naturalWidth / image.naturalHeight;
+                const containerRatio = containerWidth / containerHeight;
+                
+                console.log('图片比例:', imageRatio, '容器比例:', containerRatio);
+                
+                let displayWidth, displayHeight, displayLeft, displayTop;
+                
+                if (imageRatio > containerRatio) {
+                    // 图片较宽，上下留黑边
+                    displayWidth = containerWidth;
+                    displayHeight = containerWidth / imageRatio;
+                    displayLeft = 0;
+                    displayTop = (containerHeight - displayHeight) / 2;
+                } else {
+                    // 图片较高，左右留黑边
+                    displayHeight = containerHeight;
+                    displayWidth = containerHeight * imageRatio;
+                    displayTop = 0;
+                    displayLeft = (containerWidth - displayWidth) / 2;
+                }
+                
+                console.log('显示尺寸:', displayWidth, 'x', displayHeight, '位置:', displayLeft, displayTop);
+                
+                // 计算实际裁剪区域（相对于原始图片）
+                const cropLeft = ((selectionLeft - displayLeft) / displayWidth) * image.naturalWidth;
+                const cropTop = ((selectionTop - displayTop) / displayHeight) * image.naturalHeight;
+                const cropWidth = (selectionWidth / displayWidth) * image.naturalWidth;
+                const cropHeight = (selectionHeight / displayHeight) * image.naturalHeight;
+                
+                console.log('实际裁剪区域:', cropLeft, cropTop, cropWidth, cropHeight);
+                
+                // 检查裁剪参数是否有效
+                if (cropLeft < 0 || cropTop < 0 || cropWidth <= 0 || cropHeight <= 0 || 
+                    cropLeft + cropWidth > image.naturalWidth || 
+                    cropTop + cropHeight > image.naturalHeight) {
+                    console.error('无效的裁剪参数');
+                    showToast('裁剪区域无效', 'error');
+                    return;
+                }
+                
+                // 创建canvas进行裁剪（使用手机屏幕比例）
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // 设置canvas为手机屏幕比例 (9:16)
+                canvas.width = 1080;
+                canvas.height = 1920;
+                
+                console.log('创建canvas:', canvas.width, 'x', canvas.height);
+                
+                // 加载原始图片
+                const originalImg = new Image();
+                originalImg.crossOrigin = 'anonymous';
+                originalImg.onload = function() {
+                    try {
+                        console.log('原始图片加载完成，开始绘制');
+                        // 绘制裁剪后的图片
+                        ctx.drawImage(
+                            originalImg,
+                            cropLeft, cropTop, cropWidth, cropHeight,
+                            0, 0, canvas.width, canvas.height
+                        );
+                        
+                        // 转换为base64并保存
+                        const croppedImage = canvas.toDataURL('image/jpeg', 0.8);
+                        console.log('裁剪完成，生成base64数据');
+                        
+                        // 更新设置
+                        app.settings.backgroundImage = croppedImage;
+                        app.settings.backgroundOpacity = opacity;
+                        
+                        // 立即应用背景图片
+                        const body = document.body;
+                        body.style.backgroundImage = `url('${croppedImage}')`;
+                        body.style.backgroundSize = 'cover';
+                        body.style.backgroundPosition = 'center';
+                        body.style.backgroundAttachment = 'fixed';
+                        body.style.backgroundOpacity = opacity;
+                        
+                        // 保存设置
+                        saveData();
+                        console.log('设置已保存');
+                        
+                        // 关闭模态框
+                        document.getElementById('crop-modal').classList.add('hidden');
+                        
+                        // 显示成功提示
+                        showToast('背景图片已设置', 'success');
+                        
+                    } catch (error) {
+                        console.error('绘制图片时出错:', error);
+                        showToast('设置背景图片失败', 'error');
+                    }
+                };
+                
+                originalImg.onerror = function() {
+                    console.error('加载原始图片失败');
+                    showToast('设置背景图片失败', 'error');
+                };
+                
+                originalImg.src = app.tempBackgroundImage;
+                
+            } catch (error) {
+                console.error('裁剪过程中出错:', error);
+                showToast('设置背景图片失败', 'error');
+            }
+        }
+
         // 显示确认对话框
         function showConfirmDialog(title, message, callback) {
             elements.confirmTitle.textContent = title;
@@ -1867,6 +2392,49 @@
 
         // 初始化应用
         document.addEventListener('DOMContentLoaded', initApp);
+
+        // 辅助函数
+        function changeTheme(theme) {
+            app.settings.theme = theme;
+            document.documentElement.className = '';
+            document.documentElement.classList.add(theme);
+            saveData();
+        }
+
+        function showConfirmDialog(title, message, callback) {
+            elements.confirmTitle.textContent = title;
+            elements.confirmMessage.textContent = message;
+            elements.confirmDialog.classList.remove('hidden');
+            
+            elements.confirmOk.onclick = () => {
+                callback();
+                elements.confirmDialog.classList.add('hidden');
+            };
+        }
+
+        function showToast(message, type = 'success') {
+            elements.toastMessage.textContent = message;
+            
+            if (type === 'success') {
+                elements.toastIcon.className = 'fa fa-check-circle text-green-500';
+            } else if (type === 'error') {
+                elements.toastIcon.className = 'fa fa-exclamation-circle text-red-500';
+            } else if (type === 'warning') {
+                elements.toastIcon.className = 'fa fa-exclamation-triangle text-yellow-500';
+            } else if (type === 'info') {
+                elements.toastIcon.className = 'fa fa-info-circle text-blue-500';
+            }
+            
+            elements.toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                elements.toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+        }
     </script>
 </body>
 </html>
